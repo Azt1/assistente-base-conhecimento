@@ -24,12 +24,18 @@ class Source:
 
 class KnowledgeBase:
     def __init__(self, directory: Path):
+        if not directory.is_dir():
+            raise ValueError("A pasta da base de conhecimento não existe.")
         self.sources = []
         for path in sorted(directory.glob("*.md")):
-            text = path.read_text(encoding="utf-8")
+            text = path.read_text(encoding="utf-8").strip()
+            if not text:
+                continue
             self.sources.append(Source(path.stem, text.splitlines()[0].lstrip("# "), text))
 
     def search(self, question: str, limit: int = 3) -> list[Source]:
+        if limit < 1:
+            raise ValueError("O limite de documentos deve ser maior que zero.")
         query = tokens(question)
         ranked = []
         for source in self.sources:
