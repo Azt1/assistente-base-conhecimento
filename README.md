@@ -33,9 +33,17 @@ Não configure uma chave para testar a busca local. Não envie dados pessoais ou
 - `gemini.py`: contém o cliente do provedor, ainda pendente de teste real.
 - `base/`: documentos fictícios versionados com o código.
 
+## Testar
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+Os testes conferem a busca, o tratamento de arquivos vazios, as rotas e as validações das perguntas. Eles não usam chave, não chamam o Gemini e não medem a qualidade de respostas de IA.
+
 ## Próximas etapas
 
-1. Conferir a busca e as validações com testes automatizados.
+1. Busca e validações cobertas pelos primeiros testes automatizados.
 2. Configurar o provedor e testar uma resposta real, sem dados pessoais.
 3. Criar uma tela simples de conversa e exibição das fontes.
 4. Avaliar respostas, registrar limitações e só então preparar uma demonstração publicada.
