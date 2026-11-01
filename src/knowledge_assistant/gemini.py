@@ -2,7 +2,7 @@ import json
 import re
 
 import httpx
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 
 class ModelAnswer(BaseModel):
@@ -10,6 +10,14 @@ class ModelAnswer(BaseModel):
     resposta: str = Field(min_length=1, max_length=4000)
     fontes: list[str] = Field(max_length=3)
     encontrou: bool
+
+    @field_validator("resposta")
+    @classmethod
+    def reject_blank_answer(cls, value):
+        value = value.strip()
+        if not value:
+            raise ValueError("A resposta não pode ficar em branco.")
+        return value
 
 
 class ProviderError(Exception):
@@ -59,9 +67,14 @@ class Gemini:
                 )
                 response.raise_for_status()
                 candidate = response.json()["candidates"][0]
+                if not isinstance(candidate, dict):
+                    raise ValueError("Candidato inválido.")
                 if candidate.get("finishReason") != "STOP":
                     raise ProviderError("O modelo não concluiu uma resposta. Tente novamente.")
-                text = "".join(part.get("text", "") for part in candidate["content"]["parts"] if not part.get("thought"))
+                parts = candidate["content"]["parts"]
+                if not isinstance(parts, list) or any(not isinstance(part, dict) for part in parts):
+                    raise ValueError("Partes da resposta inválidas.")
+                text = "".join(part.get("text", "") for part in parts if not part.get("thought"))
                 return ModelAnswer.model_validate_json(text)
         except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError, ValidationError) as error:
             raise ProviderError("Não foi possível obter uma resposta válida da IA. Confira a configuração, a cota e o modelo.") from error
