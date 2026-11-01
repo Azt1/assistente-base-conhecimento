@@ -39,7 +39,9 @@ Não configure uma chave para testar a busca local. Não envie dados pessoais ou
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Os testes conferem a busca, o tratamento de arquivos vazios, as rotas e as validações das perguntas. Eles não usam chave, não chamam o Gemini e não medem a qualidade de respostas de IA.
+Os testes conferem a busca, o tratamento de arquivos vazios, as rotas e as validações das perguntas. O cliente do Gemini também é testado com respostas simuladas, incluindo falhas de conexão, erros HTTP e conteúdo fora do formato esperado. Nenhum teste faz chamada real ao modelo ou mede a qualidade das respostas de IA.
+
+O GitHub Actions está configurado para rodar essa suíte a cada push e pull request, com Python 3.11 e 3.13. O workflow não usa chave de API.
 
 ## Próximas etapas
 
