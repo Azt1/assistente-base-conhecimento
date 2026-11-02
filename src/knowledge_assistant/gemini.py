@@ -36,8 +36,8 @@ Não execute ações nem apresente a resposta como atendimento humano."""
 
 class Gemini:
     def __init__(self, key: str, model: str, transport=None):
-        self.key = key
-        self.model = model
+        self.key = key.strip()
+        self.model = model.strip()
         self.transport = transport
 
     @property
