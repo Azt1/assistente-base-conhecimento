@@ -25,6 +25,10 @@ class Question(BaseModel):
         return value
 
 
+class SearchQuestion(Question):
+    limite: int = Field(default=3, ge=1, le=3, strict=True)
+
+
 class ChatQuestion(Question):
     autoriza_envio: bool = False
 
@@ -44,8 +48,8 @@ def create_app(provider=None, base=None):
         return {"ia_configurada": model.configured, "documentos": len(knowledge.sources)}
 
     @app.post("/api/busca", response_model=SearchResponse)
-    def search(question: Question):
-        return {"fontes": [source.to_dict() for source in knowledge.search(question.pergunta)]}
+    def search(question: SearchQuestion):
+        return {"fontes": [source.to_dict() for source in knowledge.search(question.pergunta, limit=question.limite)]}
 
     @app.post("/api/chat", response_model=ChatResponse)
     def chat(question: ChatQuestion):
