@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from .gemini import Gemini, ProviderError
 from .search import KnowledgeBase
+from .schemas import ChatResponse, SearchResponse, StatusResponse
 
 ROOT = Path(__file__).parent
 UNKNOWN = "Não encontrei informação suficiente na base. Procure o atendimento humano."
@@ -38,15 +39,15 @@ def create_app(provider=None, base=None):
     def home():
         return {"projeto": "Assistente da base de conhecimento", "documentacao": "/docs"}
 
-    @app.get("/api/status")
+    @app.get("/api/status", response_model=StatusResponse)
     def status():
         return {"ia_configurada": model.configured, "documentos": len(knowledge.sources)}
 
-    @app.post("/api/busca")
+    @app.post("/api/busca", response_model=SearchResponse)
     def search(question: Question):
         return {"fontes": [source.to_dict() for source in knowledge.search(question.pergunta)]}
 
-    @app.post("/api/chat")
+    @app.post("/api/chat", response_model=ChatResponse)
     def chat(question: ChatQuestion):
         if not question.autoriza_envio:
             raise HTTPException(400, "Autorize o envio da pergunta e dos trechos ao provedor de IA.")
