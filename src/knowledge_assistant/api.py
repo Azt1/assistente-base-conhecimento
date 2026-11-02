@@ -61,7 +61,7 @@ def create_app(provider=None, base=None):
         try:
             result = model.answer(question.pergunta, sources)
         except ProviderError as error:
-            raise HTTPException(502, str(error)) from error
+            raise HTTPException(502, "A IA não conseguiu responder agora. Tente novamente em instantes.") from error
         finally:
             slots.release()
         allowed = {source.id: source for source in sources}
