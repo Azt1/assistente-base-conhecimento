@@ -21,16 +21,19 @@ python -m venv .venv
 Abra `http://127.0.0.1:8001/docs` para testar as rotas.
 
 - `GET /api/status`: informa a quantidade de documentos e se a configuração de IA está preenchida. Isso não verifica se a chave é válida.
-- `POST /api/busca`: recebe `{"pergunta": "Qual o prazo de entrega?"}` e retorna documentos relacionados, sem enviar dados a um serviço externo.
+- `POST /api/busca`: recebe `{"pergunta": "Qual o prazo de entrega?", "limite": 1}` e retorna documentos relacionados, sem enviar dados a um serviço externo. O limite é opcional e aceita de 1 a 3 documentos.
 - `POST /api/chat`: reservado para a integração com Gemini. Sem configuração, retorna `503`. O envio exige `autoriza_envio: true`, além da pergunta.
 
 Não configure uma chave para testar a busca local. Não envie dados pessoais ou documentos reais nesta demonstração.
+
+O [guia da API](docs/api.md) traz um exemplo em PowerShell, os formatos de resposta e os possíveis erros.
 
 ## Organização
 
 - `search.py`: carrega a base e compara as palavras da pergunta com as dos documentos.
 - `api.py`: recebe as requisições HTTP e valida as perguntas.
 - `gemini.py`: contém o cliente do provedor, ainda pendente de teste real.
+- `schemas.py`: define os formatos de saída documentados pela API.
 - `base/`: documentos fictícios versionados com o código.
 
 ## Testar
