@@ -42,6 +42,8 @@ form.addEventListener("submit", async (event) => {
 
   results.replaceChildren();
   results.setAttribute("aria-busy", "true");
+  submitButton.disabled = true;
+  submitButton.textContent = "Consultando...";
   const loading = document.createElement("p");
   loading.textContent = "Buscando nos documentos...";
   results.append(loading);
@@ -57,7 +59,16 @@ form.addEventListener("submit", async (event) => {
     const data = await response.json();
     results.replaceChildren();
 
-    if (!response.ok) throw new Error("Não foi possível fazer a busca.");
+    if (!response.ok) {
+      const messages = {
+        400: "Autorize o envio da pergunta para usar o modo IA.",
+        422: "Revise sua pergunta e tente novamente.",
+        429: "Já há consultas à IA em andamento. Tente de novo em instantes.",
+        502: "A IA não respondeu agora. Tente novamente mais tarde.",
+        503: "A integração com IA ainda não foi configurada no servidor.",
+      };
+      throw new Error(messages[response.status] || "Não foi possível concluir a consulta.");
+    }
     if (data.fontes.length === 0) {
       const empty = document.createElement("p");
       empty.textContent = data.resposta || "Não encontrei esse assunto nos documentos disponíveis.";
@@ -86,12 +97,16 @@ form.addEventListener("submit", async (event) => {
       card.append(title, text, citation);
       results.append(card);
     }
-  } catch {
+  } catch (cause) {
     results.replaceChildren();
     const error = document.createElement("p");
-    error.textContent = "A busca falhou. Confira se o servidor está ligado e tente de novo.";
+    error.textContent = cause instanceof TypeError
+      ? "Não consegui acessar o servidor. Confira se ele está ligado e tente de novo."
+      : cause.message;
     results.append(error);
   } finally {
     results.setAttribute("aria-busy", "false");
+    submitButton.disabled = false;
+    submitButton.textContent = selectedMode() === "chat" ? "Perguntar à IA" : "Pesquisar";
   }
 });

@@ -1,6 +1,6 @@
 # Usar a API local
 
-Com o servidor iniciado na porta 8001, abra `http://127.0.0.1:8001/docs`. Os formatos de entrada e saída de cada rota aparecem nessa página.
+Com o servidor iniciado na porta 8001, abra `http://127.0.0.1:8001` para usar a tela de consulta. A documentação interativa da API fica em `http://127.0.0.1:8001/docs`.
 
 ## Buscar documentos sem IA
 

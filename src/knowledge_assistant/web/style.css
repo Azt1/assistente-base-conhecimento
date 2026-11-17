@@ -30,6 +30,7 @@ input[type="radio"], input[type="checkbox"] { flex: none; width: 16px; height: 1
 input:focus { outline: 3px solid #1f6a4726; border-color: var(--green); }
 button { padding: 0 20px; border: 0; border-radius: 9px; color: #fff; background: var(--green); font: inherit; font-weight: 650; cursor: pointer; }
 button:hover { background: #174f35; }
+button:disabled { opacity: .65; cursor: wait; }
 .privacy-note { margin: 13px 0 0; }
 .mode-choice { display: flex; flex-wrap: wrap; gap: 12px 22px; margin: 20px 0 0; padding: 0; border: 0; }
 .mode-choice legend { margin-bottom: 10px; font-size: 13px; font-weight: 650; }

@@ -4,7 +4,7 @@ Projeto de estudo em Python para consultar documentos de uma empresa fictícia e
 
 ## Etapa atual
 
-A API inicia e permite buscar os documentos locais por palavras em comum com a pergunta. A base tem três exemplos da Loja Aurora: entregas, trocas e atendimento.
+A aplicação abre uma tela simples para pesquisar os documentos locais por palavras em comum com a pergunta. A base tem três exemplos da Loja Aurora: entregas, trocas e atendimento. A tela também permite pedir uma resposta com Gemini quando o provedor estiver configurado e a pessoa autorizar o envio.
 
 Já existe código de integração com Gemini, mas ele ainda não foi validado com uma chamada real ao modelo. Não há tela de conversa, publicação na internet nem resultados medidos com usuários. Busca local não é resposta gerada por IA.
 
@@ -18,11 +18,11 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn knowledge_assistant.api:app --host 127.0.0.1 --port 8001
 ```
 
-Abra `http://127.0.0.1:8001/docs` para testar as rotas.
+Abra `http://127.0.0.1:8001` para usar a tela ou `http://127.0.0.1:8001/docs` para testar as rotas.
 
 - `GET /api/status`: informa a quantidade de documentos e se a configuração de IA está preenchida. Isso não verifica se a chave é válida.
 - `POST /api/busca`: recebe `{"pergunta": "Qual o prazo de entrega?", "limite": 1}` e retorna documentos relacionados, sem enviar dados a um serviço externo. O limite é opcional e aceita de 1 a 3 documentos.
-- `POST /api/chat`: reservado para a integração com Gemini. Sem configuração, retorna `503`. O envio exige `autoriza_envio: true`, além da pergunta.
+- `POST /api/chat`: usa a integração com Gemini. Sem configuração, retorna `503`. O envio exige `autoriza_envio: true`, além da pergunta. A tela pede essa autorização e explica quais dados serão enviados.
 
 Não configure uma chave para testar a busca local. Não envie dados pessoais ou documentos reais nesta demonstração.
 
