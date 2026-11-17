@@ -32,6 +32,11 @@ button:hover { background: #174f35; }
 .privacy-note { margin: 13px 0 0; }
 .results { min-height: 70px; padding: 20px 4px; }
 .results:empty { min-height: 24px; }
+.results h2 { margin: 8px 0 14px; font-size: 18px; }
+.source-card { margin: 10px 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.source-card h3 { margin: 0 0 9px; font-size: 16px; }
+.source-card p { margin: 0 0 13px; color: #414b43; line-height: 1.65; white-space: pre-line; }
+.source-card small { color: var(--muted); font-size: 12px; }
 footer { padding: 20px 0 32px; border-top: 1px solid var(--line); }
 footer a { color: var(--green); text-decoration: none; }
 footer a:hover { text-decoration: underline; }

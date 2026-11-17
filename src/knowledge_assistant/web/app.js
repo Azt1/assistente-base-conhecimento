@@ -35,11 +35,14 @@ form.addEventListener("submit", async (event) => {
     results.append(heading);
     for (const source of data.fontes) {
       const card = document.createElement("article");
+      card.className = "source-card";
       const title = document.createElement("h3");
       const text = document.createElement("p");
+      const citation = document.createElement("small");
       title.textContent = source.titulo;
       text.textContent = source.texto;
-      card.append(title, text);
+      citation.textContent = `Documento: ${source.id}`;
+      card.append(title, text, citation);
       results.append(card);
     }
   } catch {
