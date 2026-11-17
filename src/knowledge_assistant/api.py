@@ -4,6 +4,7 @@ from threading import BoundedSemaphore
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
 from .gemini import Gemini, ProviderError
@@ -36,6 +37,7 @@ class ChatQuestion(Question):
 
 def create_app(provider=None, base=None):
     app = FastAPI(title="Assistente da base de conhecimento", version="0.1.0")
+    app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
     knowledge = base if base is not None else KnowledgeBase(ROOT / "base")
     model = provider if provider is not None else Gemini(os.getenv("GEMINI_API_KEY", ""), os.getenv("GEMINI_MODEL", ""))
     slots = BoundedSemaphore(2)
