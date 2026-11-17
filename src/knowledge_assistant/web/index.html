@@ -31,8 +31,18 @@
                  placeholder="Ex.: qual é o prazo de entrega?" required>
           <button type="submit">Pesquisar</button>
         </div>
+        <fieldset class="mode-choice">
+          <legend>Como quer consultar?</legend>
+          <label><input type="radio" name="mode" value="busca" checked> Busca local</label>
+          <label><input type="radio" name="mode" value="chat"> Resposta com IA</label>
+        </fieldset>
+        <label id="consent-row" class="consent-row" hidden>
+          <input id="consent" type="checkbox">
+          Entendo que a pergunta e os trechos encontrados serão enviados ao provedor de IA.
+        </label>
       </form>
       <p class="privacy-note">A busca local consulta somente os documentos desta demonstração.</p>
+      <p id="model-status" class="privacy-note" aria-live="polite"></p>
     </section>
 
     <section id="results" class="results" aria-live="polite" aria-busy="false"></section>

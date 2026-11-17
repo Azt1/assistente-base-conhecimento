@@ -26,10 +26,17 @@ h1 { margin: 0; font-size: clamp(32px, 6vw, 46px); letter-spacing: -.05em; line-
 label { display: block; margin-bottom: 10px; font-size: 14px; font-weight: 650; }
 .search-row { display: flex; gap: 10px; }
 input { flex: 1; min-width: 0; padding: 13px 14px; border: 1px solid #cfd7ce; border-radius: 9px; font: inherit; }
+input[type="radio"], input[type="checkbox"] { flex: none; width: 16px; height: 16px; margin: 0; accent-color: var(--green); }
 input:focus { outline: 3px solid #1f6a4726; border-color: var(--green); }
 button { padding: 0 20px; border: 0; border-radius: 9px; color: #fff; background: var(--green); font: inherit; font-weight: 650; cursor: pointer; }
 button:hover { background: #174f35; }
 .privacy-note { margin: 13px 0 0; }
+.mode-choice { display: flex; flex-wrap: wrap; gap: 12px 22px; margin: 20px 0 0; padding: 0; border: 0; }
+.mode-choice legend { margin-bottom: 10px; font-size: 13px; font-weight: 650; }
+.mode-choice label, .consent-row { display: flex; align-items: flex-start; gap: 8px; margin: 0; color: #414b43; font-size: 13px; font-weight: 400; line-height: 1.5; }
+.consent-row { margin-top: 14px; }
+#consent-row[hidden] { display: none; }
+.assistant-answer { padding: 16px 18px; border-left: 3px solid var(--green); border-radius: 0 10px 10px 0; background: #eaf2ec; line-height: 1.65; white-space: pre-line; }
 .results { min-height: 70px; padding: 20px 4px; }
 .results:empty { min-height: 24px; }
 .results h2 { margin: 8px 0 14px; font-size: 18px; }
