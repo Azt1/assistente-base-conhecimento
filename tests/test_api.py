@@ -16,7 +16,7 @@ def test_status_nao_expoe_chave(client):
 
 def test_documentacao_disponivel(client):
     assert client.get("/docs").status_code == 200
-    assert client.get("/").json()["documentacao"] == "/docs"
+    assert "text/html" in client.get("/").headers["content-type"]
 
 
 def test_busca_retorna_fonte_original(client):

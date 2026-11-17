@@ -3,6 +3,7 @@ from pathlib import Path
 from threading import BoundedSemaphore
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, field_validator
 
 from .gemini import Gemini, ProviderError
@@ -41,7 +42,7 @@ def create_app(provider=None, base=None):
 
     @app.get("/")
     def home():
-        return {"projeto": "Assistente da base de conhecimento", "documentacao": "/docs"}
+        return FileResponse(ROOT / "web" / "index.html")
 
     @app.get("/api/status", response_model=StatusResponse)
     def status():

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>Ajuda | Loja Aurora</title>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Loja Aurora, início">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span>aurora</span>
+      </a>
+      <span class="demo-label">Base de demonstração</span>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">CENTRAL DE AJUDA</p>
+      <h1 id="page-title">Como podemos ajudar?</h1>
+      <p class="lead">Pesquise nas informações de entrega, trocas e atendimento.</p>
+    </section>
+
+    <section class="search-panel" aria-label="Busca na base de conhecimento">
+      <form id="search-form">
+        <label for="question">Sua dúvida</label>
+        <div class="search-row">
+          <input id="question" name="question" type="search" maxlength="500"
+                 placeholder="Ex.: qual é o prazo de entrega?" required>
+          <button type="submit">Pesquisar</button>
+        </div>
+      </form>
+      <p class="privacy-note">A busca local consulta somente os documentos desta demonstração.</p>
+    </section>
+
+    <section id="results" class="results" aria-live="polite" aria-busy="false"></section>
+
+    <footer>
+      <span>Loja Aurora · projeto de demonstração</span>
+      <a href="/docs">Documentação da API</a>
+    </footer>
+  </main>
+</body>
+</html>
