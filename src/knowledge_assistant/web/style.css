@@ -32,6 +32,9 @@ button { padding: 0 20px; border: 0; border-radius: 9px; color: #fff; background
 button:hover { background: #174f35; }
 button:disabled { opacity: .65; cursor: wait; }
 .privacy-note { margin: 13px 0 0; }
+.suggestions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; color: var(--muted); font-size: 12px; }
+.suggestion { min-height: 32px; padding: 0 11px; border: 1px solid var(--line); border-radius: 999px; color: #38443b; background: #fff; font-size: 12px; font-weight: 500; }
+.suggestion:hover { border-color: var(--green); color: var(--green); background: #f6faf6; }
 .mode-choice { display: flex; flex-wrap: wrap; gap: 12px 22px; margin: 20px 0 0; padding: 0; border: 0; }
 .mode-choice legend { margin-bottom: 10px; font-size: 13px; font-weight: 650; }
 .mode-choice label, .consent-row { display: flex; align-items: flex-start; gap: 8px; margin: 0; color: #414b43; font-size: 13px; font-weight: 400; line-height: 1.5; }

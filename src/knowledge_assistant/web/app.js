@@ -7,6 +7,13 @@ const submitButton = form.querySelector("button[type=submit]");
 const statusMessage = document.querySelector("#model-status");
 const modes = document.querySelectorAll('input[name="mode"]');
 
+document.querySelectorAll(".suggestion").forEach((button) => {
+  button.addEventListener("click", () => {
+    questionInput.value = button.dataset.question;
+    questionInput.focus();
+  });
+});
+
 function selectedMode() {
   return document.querySelector('input[name="mode"]:checked').value;
 }
