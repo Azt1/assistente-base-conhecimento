@@ -3,6 +3,8 @@ const questionInput = document.querySelector("#question");
 const results = document.querySelector("#results");
 const consentRow = document.querySelector("#consent-row");
 const consent = document.querySelector("#consent");
+const limitRow = document.querySelector("#limit-row");
+const resultLimit = document.querySelector("#result-limit");
 const submitButton = form.querySelector("button[type=submit]");
 const statusMessage = document.querySelector("#model-status");
 const modes = document.querySelectorAll('input[name="mode"]');
@@ -21,6 +23,7 @@ function selectedMode() {
 modes.forEach((mode) => mode.addEventListener("change", () => {
   const wantsChat = selectedMode() === "chat";
   consentRow.hidden = !wantsChat;
+  limitRow.hidden = wantsChat;
   submitButton.textContent = wantsChat ? "Perguntar à IA" : "Pesquisar";
   statusMessage.textContent = wantsChat ? "Verificando se a IA está configurada..." : "";
 }));
@@ -61,7 +64,7 @@ form.addEventListener("submit", async (event) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(useChat
         ? { pergunta, autoriza_envio: true }
-        : { pergunta }),
+        : { pergunta, limite: Number(resultLimit.value) }),
     });
     const data = await response.json();
     results.replaceChildren();

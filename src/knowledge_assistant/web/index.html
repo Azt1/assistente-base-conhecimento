@@ -36,6 +36,14 @@
           <label><input type="radio" name="mode" value="busca" checked> Busca local</label>
           <label><input type="radio" name="mode" value="chat"> Resposta com IA</label>
         </fieldset>
+        <label id="limit-row" class="limit-row" for="result-limit">
+          Mostrar até
+          <select id="result-limit" name="limit">
+            <option value="1">1 documento</option>
+            <option value="2">2 documentos</option>
+            <option value="3" selected>3 documentos</option>
+          </select>
+        </label>
         <label id="consent-row" class="consent-row" hidden>
           <input id="consent" type="checkbox">
           Entendo que a pergunta e os trechos encontrados serão enviados ao provedor de IA.
