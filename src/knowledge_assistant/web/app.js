@@ -8,6 +8,7 @@ const resultLimit = document.querySelector("#result-limit");
 const submitButton = form.querySelector("button[type=submit]");
 const statusMessage = document.querySelector("#model-status");
 const modes = document.querySelectorAll('input[name="mode"]');
+let modelConfigured = null;
 
 document.querySelectorAll(".suggestion").forEach((button) => {
   button.addEventListener("click", () => {
@@ -18,6 +19,14 @@ document.querySelectorAll(".suggestion").forEach((button) => {
 
 function selectedMode() {
   return document.querySelector('input[name="mode"]:checked').value;
+}
+
+function updateModeStatus() {
+  statusMessage.textContent = modelConfigured === null
+    ? "Verificando se a IA está configurada..."
+    : modelConfigured
+      ? "A integração com IA está configurada no servidor."
+      : "A IA ainda não está configurada; a busca local continua disponível.";
 }
 
 modes.forEach((mode) => mode.addEventListener("change", () => {
@@ -31,12 +40,12 @@ modes.forEach((mode) => mode.addEventListener("change", () => {
 fetch("/api/status")
   .then((response) => response.json())
   .then((status) => {
-    statusMessage.textContent = status.ia_configurada
-      ? "A integração com IA está configurada no servidor."
-      : "A IA ainda não está configurada; a busca local continua disponível.";
+    modelConfigured = status.ia_configurada;
+    if (selectedMode() === "chat") updateModeStatus();
   })
   .catch(() => {
-    statusMessage.textContent = "Não foi possível consultar o status da integração com IA.";
+    modelConfigured = false;
+    if (selectedMode() === "chat") updateModeStatus();
   });
 
 form.addEventListener("submit", async (event) => {
@@ -55,7 +64,7 @@ form.addEventListener("submit", async (event) => {
   submitButton.disabled = true;
   submitButton.textContent = "Consultando...";
   const loading = document.createElement("p");
-  loading.textContent = "Buscando nos documentos...";
+  loading.textContent = useChat ? "Consultando a IA..." : "Buscando nos documentos...";
   results.append(loading);
 
   try {
