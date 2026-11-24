@@ -2,6 +2,8 @@
 
 Com o servidor iniciado na porta 8001, abra `http://127.0.0.1:8001` para usar a tela de consulta. A documentação interativa da API fica em `http://127.0.0.1:8001/docs`.
 
+Na tela, os botões de exemplo apenas preenchem a pergunta; é preciso clicar em **Pesquisar** para consultar. A busca local permite escolher de um a três documentos. No modo IA, a tela pede autorização a cada vez que você muda de volta para essa opção. A pergunta e os trechos encontrados são enviados ao Google Gemini quando o provedor está configurado.
+
 ## Buscar documentos sem IA
 
 Use `POST /api/busca` com um corpo JSON:

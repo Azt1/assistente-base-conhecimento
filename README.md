@@ -4,9 +4,9 @@ Projeto de estudo em Python para consultar documentos de uma empresa fictícia e
 
 ## Etapa atual
 
-A aplicação abre uma tela simples para pesquisar os documentos locais por palavras em comum com a pergunta. A base tem três exemplos da Loja Aurora: entregas, trocas e atendimento. A tela também permite pedir uma resposta com Gemini quando o provedor estiver configurado e a pessoa autorizar o envio.
+A aplicação abre uma tela simples para pesquisar os documentos locais por palavras em comum com a pergunta. Ela oferece dúvidas de exemplo e permite escolher quantos documentos mostrar. A base tem três exemplos da Loja Aurora: entregas, trocas e atendimento. Também é possível pedir uma resposta com Gemini quando o provedor estiver configurado e a pessoa autorizar o envio.
 
-Já existe código de integração com Gemini, mas ele ainda não foi validado com uma chamada real ao modelo. Não há tela de conversa, publicação na internet nem resultados medidos com usuários. Busca local não é resposta gerada por IA.
+Já existe código de integração com Gemini, mas ele ainda não foi validado com uma chamada real ao modelo. A tela não mantém histórico de conversa e não foi publicada na internet nem avaliada com usuários. Busca local não é resposta gerada por IA.
 
 ## Executar
 
@@ -50,7 +50,7 @@ O GitHub Actions está configurado para rodar essa suíte a cada push e pull req
 
 1. Busca e validações cobertas pelos primeiros testes automatizados.
 2. Configurar o provedor e testar uma resposta real, sem dados pessoais.
-3. Criar uma tela simples de conversa e exibição das fontes.
-4. Avaliar respostas, registrar limitações e só então preparar uma demonstração publicada.
+3. Validar uma resposta real do Gemini com dados fictícios e revisar o tratamento de erros.
+4. Avaliar as respostas e registrar limitações antes de preparar uma demonstração publicada.
 
 As perguntas e os documentos usados na consulta com IA são enviados ao Google quando essa função é configurada e autorizada. Pode haver cobrança conforme a conta e o modelo. A aplicação ainda não tem autenticação nem controle de custo por usuário; não exponha o servidor à internet nesta fase.
