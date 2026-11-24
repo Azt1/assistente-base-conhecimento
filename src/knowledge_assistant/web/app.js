@@ -31,10 +31,12 @@ function updateModeStatus() {
 
 modes.forEach((mode) => mode.addEventListener("change", () => {
   const wantsChat = selectedMode() === "chat";
+  if (!wantsChat) consent.checked = false;
   consentRow.hidden = !wantsChat;
   limitRow.hidden = wantsChat;
   submitButton.textContent = wantsChat ? "Perguntar à IA" : "Pesquisar";
-  statusMessage.textContent = wantsChat ? "Verificando se a IA está configurada..." : "";
+  if (wantsChat) updateModeStatus();
+  else statusMessage.textContent = "";
 }));
 
 fetch("/api/status")
